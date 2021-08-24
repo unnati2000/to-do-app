@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>To do app</title>
+  </head>
+  <body>
+    <div
+      class="
+        h-100
+        w-full
+        flex
+        items-center
+        justify-center
+        bg-teal-lightest
+        font-sans
+      "
+    >
+      <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+        <div class="mb-4">
+          <h1 class="text-3xl md:text-4xl text-indigo-600 font-medium mb-2">
+            To do app
+          </h1>
+          <div class="flex mt-4">
+            <input
+              class="
+                shadow
+                appearance-none
+                border
+                rounded
+                w-full
+                py-2
+                px-3
+                mr-4
+                text-grey-darker
+              "
+              placeholder="Add Todo"
+            />
+            <button
+              class="
+                p-2
+                lg:px-4
+                md:mx-2
+                text-indigo-600 text-center
+                border border-solid border-indigo-600
+                rounded
+                hover:bg-indigo-600 hover:text-white
+                transition-colors
+                duration-300
+                mt-1
+                md:mt-0 md:ml-1
+              "
+            >
+              Add
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="flex mb-4 items-center">
+            <p class="w-full text-grey-darkest">
+              Add another component to Tailwind Components
+            </p>
+            <button class="p-2 lg:px-4 md:mx-2 text-white rounded bg-green-600">
+              Edit
+            </button>
+            <button class="p-2 lg:px-4 md:mx-2 text-white rounded bg-red-600">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
