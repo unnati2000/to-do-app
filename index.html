@@ -41,6 +41,8 @@
                 mr-4
                 text-grey-darker
               "
+              name="text"
+              id="text"
               placeholder="Add Todo"
             />
             <button
@@ -57,25 +59,15 @@
                 mt-1
                 md:mt-0 md:ml-1
               "
+              id="add"
             >
               Add
             </button>
           </div>
         </div>
-        <div>
-          <div class="flex mb-4 items-center">
-            <p class="w-full text-grey-darkest">
-              Add another component to Tailwind Components
-            </p>
-            <button class="p-2 lg:px-4 md:mx-2 text-white rounded bg-green-600">
-              Edit
-            </button>
-            <button class="p-2 lg:px-4 md:mx-2 text-white rounded bg-red-600">
-              Remove
-            </button>
-          </div>
-        </div>
+        <div id="listBox"></div>
       </div>
     </div>
+    <script src="./index.js"></script>
   </body>
 </html>
