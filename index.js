@@ -5,18 +5,11 @@ const listBox = document.getElementById("listBox");
 const todoArray = [];
 let id = 1;
 
-const deleteItem = (id) => {
-  console.log(id);
-  todoArray.filter((item) => {
-    return item.id === id;
-  });
-  console.log(todoArray);
-};
-
 add.addEventListener("click", (e) => {
   e.preventDefault();
 
   console.log(text.value);
+
   todoArray.push({ text: text.value, id: id });
 
   // todo
@@ -34,7 +27,7 @@ add.addEventListener("click", (e) => {
   todoEditButton.className =
     "p-2 lg:px-4 md:mx-2 text-white rounded bg-green-600";
   todoEditButton.innerText = "Edit";
-  todoEditButton.id = id;
+  todoEditButton.id = `edit-${id}`;
   todoDiv.append(todoEditButton);
 
   // delete button
@@ -43,8 +36,10 @@ add.addEventListener("click", (e) => {
   todoDeleteButton.className =
     "p-2 lg:px-4 md:mx-2 text-white rounded bg-red-600";
   todoDeleteButton.innerText = "Delete";
-  todoDeleteButton.id = id;
-  todoDeleteButton.addEventListener("click", deleteItem(id));
+  todoDeleteButton.id = `del-${id}`;
+  todoDeleteButton.addEventListener("click", () => {
+    console.log("hello");
+  });
   todoDiv.append(todoDeleteButton);
 
   listBox.append(todoDiv);
