@@ -1,50 +1,72 @@
 const text = document.getElementById("text");
 const add = document.getElementById("add");
+const save = document.getElementById("save-todo");
 const listBox = document.getElementById("listBox");
+const saveInd = document.getElementById("saveIndex");
 
-const todoArray = [];
-let id = 1;
+let todoArray = [];
 
 add.addEventListener("click", (e) => {
   e.preventDefault();
 
-  console.log(text.value);
-
-  todoArray.push({ text: text.value, id: id });
-
-  // todo
-  const todoDiv = document.createElement("div");
-  todoDiv.className = "flex mb-4 items-center";
-
-  // title
-  const todoTitle = document.createElement("p");
-  todoTitle.className = "w-full text-grey-darkest";
-  todoTitle.innerText = text.value;
-  todoDiv.append(todoTitle);
-
-  // edit button
-  const todoEditButton = document.createElement("button");
-  todoEditButton.className =
-    "p-2 lg:px-4 md:mx-2 text-white rounded bg-green-600";
-  todoEditButton.innerText = "Edit";
-  todoEditButton.id = `edit-${id}`;
-  todoDiv.append(todoEditButton);
-
-  // delete button
-
-  const todoDeleteButton = document.createElement("button");
-  todoDeleteButton.className =
-    "p-2 lg:px-4 md:mx-2 text-white rounded bg-red-600";
-  todoDeleteButton.innerText = "Delete";
-  todoDeleteButton.id = `del-${id}`;
-  todoDeleteButton.addEventListener("click", () => {
-    console.log("hello");
-  });
-  todoDiv.append(todoDeleteButton);
-
-  listBox.append(todoDiv);
-
-  id = id + 1;
+  let todo = localStorage.getItem("todo");
+  if (todo === null) {
+    todoArray = [];
+  } else {
+    todoArray = JSON.parse(todo);
+  }
+  todoArray.push(text.value);
 
   text.value = "";
+  localStorage.setItem("todo", JSON.stringify(todoArray));
+  displayTodo();
 });
+
+function displayTodo() {
+  let todo = localStorage.getItem("todo");
+  if (todo === null) {
+    todoArray = [];
+  } else {
+    todoArray = JSON.parse(todo);
+  }
+
+  let htmlCode = "";
+  todoArray.forEach((list, ind) => {
+    htmlCode += `<div class='flex mb-4 items-center'>
+    <p class=''>${list}</p>
+    <button onclick='edit(${ind})' class='flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey bg-green-600'>Edit</button>
+    <button onclick='deleteTodo(${ind})' class='flex-no-shrink p-2 ml-2 border-2 rounded bg-red-500'>Delete</button>
+</div>`;
+  });
+
+  listBox.innerHTML = htmlCode;
+}
+
+function edit(ind) {
+  saveInd.value = ind;
+  let todo = localStorage.getItem("todo");
+  let todoArr = JSON.parse(todo);
+  text.value = todoArr[ind];
+  add.style.display = "none";
+  save.style.display = "block";
+}
+
+save.addEventListener("click", () => {
+  let todo = localStorage.getItem("todo");
+  let todoArr = JSON.parse(todo);
+  let id = saveInd.value;
+  todoArr[id] = text.value;
+  add.style.display = "block";
+  save.style.display = "none";
+  text.value = "";
+  localStorage.setItem("todo", JSON.stringify(todoArr));
+  displayTodo();
+});
+
+function deleteTodo(ind) {
+  let todo = localStorage.getItem("todo");
+  todoArray = JSON.parse(todo);
+  todoArray.splice(ind, 1);
+  localStorage.setItem("todo", JSON.stringify(todoArray));
+  displayTodo();
+}
