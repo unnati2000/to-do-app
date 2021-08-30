@@ -1,12 +1,12 @@
 const text = document.getElementById("text");
-const add = document.getElementById("add");
-const save = document.getElementById("save-todo");
+const addTaskButton = document.getElementById("add-task-btn");
+const saveTaskButton = document.getElementById("save-todo-btn");
 const listBox = document.getElementById("listBox");
 const saveInd = document.getElementById("saveIndex");
 
 let todoArray = [];
 
-add.addEventListener("click", (e) => {
+addTaskButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   let todo = localStorage.getItem("todo");
@@ -33,9 +33,9 @@ function displayTodo() {
   let htmlCode = "";
   todoArray.forEach((list, ind) => {
     htmlCode += `<div class='flex mb-4 items-center'>
-    <p class=''>${list}</p>
-    <button onclick='edit(${ind})' class='flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey bg-green-600'>Edit</button>
-    <button onclick='deleteTodo(${ind})' class='flex-no-shrink p-2 ml-2 border-2 rounded bg-red-500'>Delete</button>
+    <p class='w-full text-grey-darkest'>${list}</p>
+    <button onclick='edit(${ind})' class='flex-no-shrink p-2 ml-4 mr-2 border-2 rounded text-white text-grey bg-green-600'>Edit</button>
+    <button onclick='deleteTodo(${ind})' class='flex-no-shrink p-2 ml-2 border-2 rounded text-white bg-red-500'>Delete</button>
 </div>`;
   });
 
@@ -45,21 +45,21 @@ function displayTodo() {
 function edit(ind) {
   saveInd.value = ind;
   let todo = localStorage.getItem("todo");
-  let todoArr = JSON.parse(todo);
-  text.value = todoArr[ind];
-  add.style.display = "none";
-  save.style.display = "block";
+  todoArray = JSON.parse(todo);
+  text.value = todoArray[ind];
+  addTaskButton.style.display = "none";
+  saveTaskButton.style.display = "block";
 }
 
-save.addEventListener("click", () => {
+saveTaskButton.addEventListener("click", () => {
   let todo = localStorage.getItem("todo");
-  let todoArr = JSON.parse(todo);
+  todoArray = JSON.parse(todo);
   let id = saveInd.value;
-  todoArr[id] = text.value;
-  add.style.display = "block";
-  save.style.display = "none";
+  todoArray[id] = text.value;
+  addTaskButton.style.display = "block";
+  saveTaskButton.style.display = "none";
   text.value = "";
-  localStorage.setItem("todo", JSON.stringify(todoArr));
+  localStorage.setItem("todo", JSON.stringify(todoArray));
   displayTodo();
 });
 
